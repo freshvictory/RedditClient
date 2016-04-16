@@ -66,7 +66,7 @@ class Reddit {
             }
         }
         
-        var post = Post(title: title, op: op, subreddit: subreddit, url: url, votes: votes, comments: comments, domain: domain, isSelf: isSelf, selftext: selfText)
+        let post = Post(title: title, op: op, subreddit: subreddit, url: url, votes: votes, comments: comments, domain: domain, isSelf: isSelf, selftext: selfText)
         
         // Let's see if there's embeddable media
         if let embed = postdata["media_embed"] as? Payload {

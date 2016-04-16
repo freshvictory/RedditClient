@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xg4-3K-Mn6">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xg4-3K-Mn6">
                                 <rect key="frame" x="0.0" y="300" width="600" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="nnA-PB-fWP">
@@ -39,11 +40,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="179" height="245"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EjS-s7-pj8">
+                                                <webView userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EjS-s7-pj8">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                                 </webView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6D-QY-o4D">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6D-QY-o4D">
                                                     <rect key="frame" x="8" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -103,19 +104,19 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCard" id="g2E-l0-sL9" customClass="ImageCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="59" width="179" height="245"/>
+                                        <rect key="frame" x="180" y="59" width="179" height="245"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="179" height="245"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="SThomas.small.99.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hOb-g6-SBr" userLabel="ImagePreview">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SThomas.small.99.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hOb-g6-SBr" userLabel="ImagePreview">
                                                     <rect key="frame" x="0.0" y="0.0" width="179" height="302"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GxF-p2-UoT" userLabel="TextShadow">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBJ-nE-fc1">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBJ-nE-fc1">
                                                     <rect key="frame" x="8" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -147,6 +148,9 @@
                                                 <exclude reference="VBJ-nE-fc1"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <exclude reference="3oR-fu-eH6"/>
+                                                <exclude reference="BrO-Tj-nI0"/>
+                                                <exclude reference="xhd-Y2-o0J"/>
                                                 <exclude reference="94c-Kl-daW"/>
                                                 <exclude reference="dRk-IE-GXs"/>
                                                 <exclude reference="eyp-I3-lL7"/>
@@ -155,9 +159,6 @@
                                                 <exclude reference="1sL-DT-l1w"/>
                                                 <exclude reference="34w-za-zo9"/>
                                                 <exclude reference="vug-rb-cNY"/>
-                                                <exclude reference="3oR-fu-eH6"/>
-                                                <exclude reference="BrO-Tj-nI0"/>
-                                                <exclude reference="xhd-Y2-o0J"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
@@ -167,6 +168,9 @@
                                                 <include reference="VBJ-nE-fc1"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <include reference="3oR-fu-eH6"/>
+                                                <include reference="BrO-Tj-nI0"/>
+                                                <include reference="xhd-Y2-o0J"/>
                                                 <include reference="94c-Kl-daW"/>
                                                 <include reference="dRk-IE-GXs"/>
                                                 <include reference="eyp-I3-lL7"/>
@@ -175,9 +179,6 @@
                                                 <include reference="1sL-DT-l1w"/>
                                                 <include reference="34w-za-zo9"/>
                                                 <include reference="vug-rb-cNY"/>
-                                                <include reference="3oR-fu-eH6"/>
-                                                <include reference="BrO-Tj-nI0"/>
-                                                <include reference="xhd-Y2-o0J"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -187,13 +188,13 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="textCard" id="AzH-L0-atr" customClass="TextCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="59" width="179" height="245"/>
+                                        <rect key="frame" x="360" y="59" width="179" height="245"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="179" height="245"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7FI-Ku-fQu">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7FI-Ku-fQu">
                                                     <rect key="frame" x="8" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -282,12 +283,16 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xg4-3K-Mn6" secondAttribute="bottom" id="0zA-AR-Xq1">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstAttribute="trailing" secondItem="xg4-3K-Mn6" secondAttribute="trailing" id="A8K-wb-wzW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xg4-3K-Mn6" secondAttribute="trailing" id="Usx-A8-pZS">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
                             </constraint>
+                            <constraint firstItem="xg4-3K-Mn6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="236" id="YBo-02-viO"/>
+                            <constraint firstItem="xg4-3K-Mn6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZAZ-kd-OcI"/>
                             <constraint firstItem="xg4-3K-Mn6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ZTL-jN-CFn">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
                             </constraint>
+                            <constraint firstItem="xg4-3K-Mn6" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="rRF-eL-0NE"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -307,7 +312,7 @@
                     <navigationItem key="navigationItem" id="3vP-WG-hAz">
                         <nil key="title"/>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="bsc-cP-1Z4">
-                            <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                            <rect key="frame" x="252" y="7" width="97" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -323,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1482" y="471.75"/>
+            <point key="canvasLocation" x="1482" y="489"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C5Z-8V-dhr">
