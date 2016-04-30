@@ -98,7 +98,7 @@
                                         <connections>
                                             <outlet property="titleLabel" destination="I6D-QY-o4D" id="Nob-mZ-NFF"/>
                                             <outlet property="webView" destination="EjS-s7-pj8" id="5no-e6-TU5"/>
-                                            <segue destination="dI0-XX-svD" kind="presentation" id="OXT-zS-yZV"/>
+                                            <segue destination="dI0-XX-svD" kind="push" id="OXT-zS-yZV"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCard" id="g2E-l0-sL9" customClass="ImageCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
@@ -183,7 +183,7 @@
                                             <outlet property="imageView" destination="hOb-g6-SBr" id="q3M-Qa-bj0"/>
                                             <outlet property="textShadowView" destination="GxF-p2-UoT" id="0w8-yZ-rIO"/>
                                             <outlet property="titleLabel" destination="VBJ-nE-fc1" id="HE0-U2-dGV"/>
-                                            <segue destination="dI0-XX-svD" kind="presentation" id="a2C-oW-oUO"/>
+                                            <segue destination="dI0-XX-svD" kind="push" id="a2C-oW-oUO"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="textCard" id="AzH-L0-atr" customClass="TextCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
@@ -252,7 +252,7 @@
                                         <connections>
                                             <outlet property="bodyLabel" destination="Xur-Bs-UPq" id="Kjr-97-BfD"/>
                                             <outlet property="titleLabel" destination="7FI-Ku-fQu" id="TCX-YP-DM5"/>
-                                            <segue destination="dI0-XX-svD" kind="presentation" id="6Ur-Uj-TdZ"/>
+                                            <segue destination="dI0-XX-svD" kind="show" id="6Ur-Uj-TdZ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -333,7 +333,15 @@
         <!--Fullscreen Page View Controller-->
         <scene sceneID="mGP-fC-nPo">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="dI0-XX-svD" customClass="FullscreenPageViewController" customModule="RedditClient" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="dI0-XX-svD" customClass="FullscreenPageViewController" customModule="RedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems>
+                        <barButtonItem title="previous" id="Vnf-bl-V9q"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="8h6-To-xah"/>
+                        <barButtonItem title="next" id="Ghn-IJ-ID0"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="VF1-Gg-Kp0"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tWF-QZ-vet" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2299.5" y="493.5"/>
@@ -356,7 +364,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9Nw-Zl-o8g" firstAttribute="top" secondItem="c6H-1I-7r0" secondAttribute="bottom" id="4TS-aN-0dM"/>
                             <constraint firstItem="c6H-1I-7r0" firstAttribute="centerX" secondItem="4Nb-do-yV4" secondAttribute="centerX" id="Aff-EN-PgN"/>
+                            <constraint firstItem="c6H-1I-7r0" firstAttribute="top" secondItem="4Nb-do-yV4" secondAttribute="topMargin" id="G9O-KJ-bcq"/>
                             <constraint firstItem="c6H-1I-7r0" firstAttribute="centerY" secondItem="4Nb-do-yV4" secondAttribute="centerY" id="Mo2-V6-jWK"/>
                             <constraint firstItem="c6H-1I-7r0" firstAttribute="height" secondItem="4Nb-do-yV4" secondAttribute="height" id="QgC-cA-ZUO"/>
                             <constraint firstItem="c6H-1I-7r0" firstAttribute="width" secondItem="4Nb-do-yV4" secondAttribute="width" id="hAW-Wx-BNX"/>
@@ -367,9 +377,11 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Aff-EN-PgN"/>
+                                <exclude reference="G9O-KJ-bcq"/>
                                 <exclude reference="Mo2-V6-jWK"/>
                                 <exclude reference="QgC-cA-ZUO"/>
                                 <exclude reference="hAW-Wx-BNX"/>
+                                <exclude reference="4TS-aN-0dM"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -378,9 +390,11 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="Aff-EN-PgN"/>
+                                <include reference="G9O-KJ-bcq"/>
                                 <include reference="Mo2-V6-jWK"/>
-                                <include reference="QgC-cA-ZUO"/>
+                                <exclude reference="QgC-cA-ZUO"/>
                                 <include reference="hAW-Wx-BNX"/>
+                                <include reference="4TS-aN-0dM"/>
                             </mask>
                         </variation>
                     </view>
