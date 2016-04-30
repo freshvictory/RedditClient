@@ -315,6 +315,11 @@
                                 <outlet property="delegate" destination="BYZ-38-t0r" id="64J-lq-LK7"/>
                             </connections>
                         </textField>
+                        <barButtonItem key="rightBarButtonItem" title="log in" id="UdO-Kl-aWY">
+                            <connections>
+                                <action selector="login:" destination="BYZ-38-t0r" id="Mza-r8-ihZ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="postCollectionView" destination="xg4-3K-Mn6" id="2oT-s2-60B"/>

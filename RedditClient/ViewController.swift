@@ -10,6 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDataSource {
     
+    @IBAction func login(sender: UIBarButtonItem) {
+        Reddit.sendAuthRequest()
+    }
+    
     // The text field for entering a specific subreddit
     @IBOutlet weak var subredditTextField: UITextField!
     
