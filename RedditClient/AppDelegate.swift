@@ -40,6 +40,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        print("deep link recieved from \(sourceApplication): \(url)")
+        let rawFragment = url.fragment!
+        print("raw fragment: \(rawFragment)")
+        let tokenStart = rawFragment.substringFromIndex(rawFragment.startIndex.advancedBy(13))
+        let token = tokenStart.substringToIndex(tokenStart.characters.indexOf("&")!)
+        print("token: \(token)")
+        
+        
+        return true
+    }
 
 
 }
