@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
 typealias Payload = [String: AnyObject]
 
 class Reddit {
   
     static var posts: [Post] = []
+    
+    static var token: String?
 
     static func refreshReddit(reddit: String = "https://www.reddit.com/") -> Void {
         posts = []
@@ -76,5 +79,9 @@ class Reddit {
         }
 
         return post
+    }
+    
+    static func sendAuthRequest(){
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://www.reddit.com/api/v1/authorize?client_id=OI7wplUN-g7pGA&response_type=token&state=RANDOM_STRING&redirect_uri=readitClient://oauth&scope=identity,flair,history,mysubreddits,read,report,save,subscribe,vote")!)
     }
 }
