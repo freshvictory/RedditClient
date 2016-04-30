@@ -10,13 +10,14 @@ import UIKit
 
 class FullscreenPost: UIViewController {
     
+    @IBOutlet weak var webView: UIWebView!
     
     var url:NSURL?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        webView.loadRequest(NSURLRequest(URL: url!))
+        webView.loadRequest(NSURLRequest(URL: url!))
         // Do any additional setup after loading the view.
     }
 

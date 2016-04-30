@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FullscreenPageViewController: UIPageViewController {
+class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDataSource {
     
     var fullscreenPostViewControllers: [UIViewController] = [UIViewController]()
     
@@ -18,7 +18,8 @@ class FullscreenPageViewController: UIPageViewController {
         super.viewDidLoad()
         
         createAllViewControllers()
-        print("Received index: \(currentIndex)")
+        
+        dataSource = self
         
         let firstViewController = fullscreenPostViewControllers[currentIndex]
         navigationItem.title = Reddit.posts[currentIndex].title

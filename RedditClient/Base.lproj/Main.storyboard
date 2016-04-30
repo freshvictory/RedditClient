@@ -98,7 +98,7 @@
                                         <connections>
                                             <outlet property="titleLabel" destination="I6D-QY-o4D" id="Nob-mZ-NFF"/>
                                             <outlet property="webView" destination="EjS-s7-pj8" id="5no-e6-TU5"/>
-                                            <segue destination="dI0-XX-svD" kind="show" id="OXT-zS-yZV"/>
+                                            <segue destination="dI0-XX-svD" kind="presentation" id="OXT-zS-yZV"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCard" id="g2E-l0-sL9" customClass="ImageCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
@@ -183,7 +183,7 @@
                                             <outlet property="imageView" destination="hOb-g6-SBr" id="q3M-Qa-bj0"/>
                                             <outlet property="textShadowView" destination="GxF-p2-UoT" id="0w8-yZ-rIO"/>
                                             <outlet property="titleLabel" destination="VBJ-nE-fc1" id="HE0-U2-dGV"/>
-                                            <segue destination="dI0-XX-svD" kind="show" id="a2C-oW-oUO"/>
+                                            <segue destination="dI0-XX-svD" kind="presentation" id="a2C-oW-oUO"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="textCard" id="AzH-L0-atr" customClass="TextCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
@@ -252,7 +252,7 @@
                                         <connections>
                                             <outlet property="bodyLabel" destination="Xur-Bs-UPq" id="Kjr-97-BfD"/>
                                             <outlet property="titleLabel" destination="7FI-Ku-fQu" id="TCX-YP-DM5"/>
-                                            <segue destination="dI0-XX-svD" kind="show" id="6Ur-Uj-TdZ"/>
+                                            <segue destination="dI0-XX-svD" kind="presentation" id="6Ur-Uj-TdZ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -333,24 +333,59 @@
             </objects>
             <point key="canvasLocation" x="2299.5" y="493.5"/>
         </scene>
-        <!--FullscreenPost-->
-        <scene sceneID="Y42-Fi-ESP">
+        <!--Fullscreen Post-->
+        <scene sceneID="P0P-8T-s6Z">
             <objects>
-                <viewController storyboardIdentifier="fullscreenPost" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yuv-Ej-S7g" userLabel="FullscreenPost" customClass="FullscreenPost" customModule="RedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="fullscreenPost" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5OW-cF-XLm" customClass="FullscreenPost" customModule="RedditClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EER-ee-sxR"/>
-                        <viewControllerLayoutGuide type="bottom" id="VA9-74-Mhl"/>
+                        <viewControllerLayoutGuide type="top" id="bbc-wI-13V"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Nw-Zl-o8g"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ui3-Zc-jt8">
+                    <view key="view" contentMode="scaleToFill" id="4Nb-do-yV4">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6H-1I-7r0">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="c6H-1I-7r0" firstAttribute="centerX" secondItem="4Nb-do-yV4" secondAttribute="centerX" id="Aff-EN-PgN"/>
+                            <constraint firstItem="c6H-1I-7r0" firstAttribute="centerY" secondItem="4Nb-do-yV4" secondAttribute="centerY" id="Mo2-V6-jWK"/>
+                            <constraint firstItem="c6H-1I-7r0" firstAttribute="height" secondItem="4Nb-do-yV4" secondAttribute="height" id="QgC-cA-ZUO"/>
+                            <constraint firstItem="c6H-1I-7r0" firstAttribute="width" secondItem="4Nb-do-yV4" secondAttribute="width" id="hAW-Wx-BNX"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="c6H-1I-7r0"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Aff-EN-PgN"/>
+                                <exclude reference="Mo2-V6-jWK"/>
+                                <exclude reference="QgC-cA-ZUO"/>
+                                <exclude reference="hAW-Wx-BNX"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="c6H-1I-7r0"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Aff-EN-PgN"/>
+                                <include reference="Mo2-V6-jWK"/>
+                                <include reference="QgC-cA-ZUO"/>
+                                <include reference="hAW-Wx-BNX"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <toolbarItems/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="c6H-1I-7r0" id="6Zk-xi-JtN"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="16b-Xm-zEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="40s-5o-Pvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2952" y="493.5"/>
+            <point key="canvasLocation" x="3012" y="489.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C5Z-8V-dhr">
@@ -375,6 +410,6 @@
         <image name="SThomas.small.99.jpg" width="484" height="704"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OXT-zS-yZV"/>
+        <segue reference="a2C-oW-oUO"/>
     </inferredMetricsTieBreakers>
 </document>
