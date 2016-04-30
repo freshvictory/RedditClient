@@ -53,20 +53,19 @@ class Reddit {
           else {
             return nil
         }
-        
+        var previewURL: NSURL = NSURL()
         // Let's see if there's an image for this
         if let imagePreview = postdata["preview"] as? Payload {
             if let images = imagePreview["images"] as? [Payload] {
                 if let source = images.first!["source"] {
                     if let imageURL = NSURL(string: (source["url"] as? String)!) {
-                        print(imageURL.absoluteString)
-                        url = imageURL
+                        previewURL = imageURL
                     }
                 }
             }
         }
         
-        let post = Post(title: title, op: op, subreddit: subreddit, url: url, votes: votes, comments: comments, domain: domain, isSelf: isSelf, selftext: selfText)
+        let post = Post(title: title, op: op, subreddit: subreddit, url: url, votes: votes, comments: comments, domain: domain, isSelf: isSelf, selftext: selfText, previewURL: previewURL)
         
         // Let's see if there's embeddable media
         if let embed = postdata["media_embed"] as? Payload {

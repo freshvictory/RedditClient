@@ -21,9 +21,10 @@ class Post {
     var isSelf: Bool
     var selftext: String?
     var mediaEmbed: String?
+    var previewURL: NSURL?
     //var commentLink: NSURL
 
-    init(title: String, op: String, subreddit: String, url: NSURL, votes: Int, comments: Int, domain: String, isSelf: Bool, selftext: String /*, commentLink: NSURL*/) {
+    init(title: String, op: String, subreddit: String, url: NSURL, votes: Int, comments: Int, domain: String, isSelf: Bool, selftext: String, previewURL: NSURL /*, commentLink: NSURL*/) {
         self.title = title
         self.op = op
         self.subreddit = subreddit
@@ -33,6 +34,7 @@ class Post {
         self.domain = domain
         self.isSelf = isSelf
         self.selftext = selftext
+        self.previewURL = previewURL
         loadImage { (post, error) in
             //add something later
         }
@@ -40,23 +42,25 @@ class Post {
     }
     
     func loadImage(completion: (post: Post, error: NSError?) -> Void) {
-        let loadRequest = NSURLRequest(URL: url)
-        NSURLConnection.sendAsynchronousRequest(loadRequest, queue: NSOperationQueue.mainQueue()) {
-            resoponse, data, error in
-            self.image = nil
-            if error != nil {
-                completion(post: self, error: error)
-                return
-            }
-            
-            if data != nil {
-                let returnedImage = UIImage(data: data!)
-                self.image = returnedImage
+        if previewURL != nil && previewURL != NSURL() {
+            let loadRequest = NSURLRequest(URL: previewURL!)
+            NSURLConnection.sendAsynchronousRequest(loadRequest, queue: NSOperationQueue.mainQueue()) {
+                resoponse, data, error in
+                self.image = nil
+                if error != nil {
+                    completion(post: self, error: error)
+                    return
+                }
+                
+                if data != nil {
+                    let returnedImage = UIImage(data: data!)
+                    self.image = returnedImage
+                    completion(post: self, error: nil)
+                    return
+                }
+                
                 completion(post: self, error: nil)
-                return
             }
-            
-            completion(post: self, error: nil)
         }
     }
 }

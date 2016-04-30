@@ -46,12 +46,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
 //            //4
 //            if self.chosenPost != nil {
 //                self.postCollectionView.scrollToItemAtIndexPath(
-//                    ,
+//                    NSIndexPath(forItem: 0, inSection: 0),
 //                    atScrollPosition: .CenteredVertically,
 //                    animated: true)
 //            }
 //        }
-        
+    
         return true
     }
 
@@ -61,7 +61,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
     let imageReuseIdentifier = "imageCard"
     let textReuseIdentifier = "textCard"
     let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    var defaultHeight: CGFloat = 300 {
+    var defaultHeight: CGFloat = 350 {
         didSet {
             if defaultHeight != oldValue {
                 postCollectionView.collectionViewLayout.invalidateLayout()
@@ -149,12 +149,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
     
     func buildCell(cell: ArticleCardCollectionViewCell, post: Post) {
         cell.titleLabel.text = post.title
-//        if post.mediaEmbed != nil {
-//            cell.webView.allowsInlineMediaPlayback = true
-//            cell.webView.loadHTMLString(post.mediaEmbed!, baseURL: NSBundle.mainBundle().bundleURL)
-//        } else {
+        if post.previewURL != nil && post.previewURL != NSURL() {
+            cell.webView.loadRequest(NSURLRequest(URL: post.previewURL!))
+        } else {
             cell.webView.loadRequest(NSURLRequest(URL: post.url))
-//        }
+        }
     }
     
     func shapeCell(cell: UICollectionViewCell) {
@@ -179,22 +178,30 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
     func postAtIndexPath(indexPath: NSIndexPath) -> Post {
         return Reddit.posts[indexPath.row]
     }
+    
+    func collectionView(collection: UICollectionView, selectedItemIndex: NSIndexPath) {
+        print("hello from should do something")
+        self.performSegueWithIdentifier("showDetail", sender: self)
+    }
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if let destination = segue.destinationViewController as? FullscreenPageViewController {
+            if let cell = sender as? UICollectionViewCell {
+                let index = self.postCollectionView.indexPathForCell(cell)!.row
+                destination.currentIndex = index
+            }
+        }
+    }
 
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
-        
-        
-//        if indexPath == chosenPost {
-//            var size = view.bounds.size
-//            size.height -= topLayoutGuide.length
-//            size.height -= (sectionInsets.top + sectionInsets.right)
-//            size.width -= (sectionInsets.left + sectionInsets.right)
-//            return flickrPhoto.sizeToFillWidthOfSize(size)
-//        }
         postCollectionView.collectionViewLayout.invalidateLayout()
         return CGSize(width: defaultWidth, height: defaultHeight)
     }
@@ -207,13 +214,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 extension ViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView,
                                  shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if chosenPost == indexPath {
-            chosenPost = nil
-        }
-        else {
-            chosenPost = indexPath
-        }
-        return false
+        return true
     }
 }
 
