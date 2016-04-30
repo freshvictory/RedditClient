@@ -23,88 +23,16 @@
                                 <rect key="frame" x="0.0" y="300" width="600" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="nnA-PB-fWP">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="300"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="400"/>
                                     </constraint>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="1" minimumInteritemSpacing="0.0" id="hqO-ln-bNm">
-                                    <size key="itemSize" width="179" height="245"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
+                                <collectionViewLayout key="collectionViewLayout" id="9f8-oe-sKG" customClass="AutoExpandLayout" customModule="RedditClient" customModuleProvider="target"/>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="articleCard" id="24o-dB-Pkd" userLabel="articleCard" customClass="ArticleCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="59" width="179" height="245"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="179" height="245"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <webView userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EjS-s7-pj8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                                                </webView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6D-QY-o4D">
-                                                    <rect key="frame" x="8" y="8" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <size key="shadowOffset" width="0.0" height="1"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="EjS-s7-pj8" firstAttribute="height" secondItem="24o-dB-Pkd" secondAttribute="height" id="Iz5-8S-ldi"/>
-                                            <constraint firstItem="I6D-QY-o4D" firstAttribute="top" secondItem="24o-dB-Pkd" secondAttribute="topMargin" id="MoV-eN-Ml7"/>
-                                            <constraint firstItem="EjS-s7-pj8" firstAttribute="centerX" secondItem="24o-dB-Pkd" secondAttribute="centerX" id="ORF-G6-F5z"/>
-                                            <constraint firstItem="I6D-QY-o4D" firstAttribute="trailing" secondItem="24o-dB-Pkd" secondAttribute="trailingMargin" id="WTZ-7r-YPi"/>
-                                            <constraint firstItem="EjS-s7-pj8" firstAttribute="centerY" secondItem="24o-dB-Pkd" secondAttribute="centerY" id="bSZ-bL-FnP"/>
-                                            <constraint firstItem="I6D-QY-o4D" firstAttribute="leading" secondItem="24o-dB-Pkd" secondAttribute="leadingMargin" id="ksk-t2-1IC"/>
-                                            <constraint firstItem="EjS-s7-pj8" firstAttribute="width" secondItem="24o-dB-Pkd" secondAttribute="width" id="xEY-Tr-tKW"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="subviews">
-                                                <exclude reference="EjS-s7-pj8"/>
-                                                <exclude reference="I6D-QY-o4D"/>
-                                            </mask>
-                                            <mask key="constraints">
-                                                <exclude reference="MoV-eN-Ml7"/>
-                                                <exclude reference="WTZ-7r-YPi"/>
-                                                <exclude reference="ksk-t2-1IC"/>
-                                                <exclude reference="Iz5-8S-ldi"/>
-                                                <exclude reference="ORF-G6-F5z"/>
-                                                <exclude reference="bSZ-bL-FnP"/>
-                                                <exclude reference="xEY-Tr-tKW"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
-                                            <mask key="subviews">
-                                                <include reference="EjS-s7-pj8"/>
-                                                <include reference="I6D-QY-o4D"/>
-                                            </mask>
-                                            <mask key="constraints">
-                                                <include reference="MoV-eN-Ml7"/>
-                                                <include reference="WTZ-7r-YPi"/>
-                                                <include reference="ksk-t2-1IC"/>
-                                                <include reference="Iz5-8S-ldi"/>
-                                                <include reference="ORF-G6-F5z"/>
-                                                <include reference="bSZ-bL-FnP"/>
-                                                <include reference="xEY-Tr-tKW"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <outlet property="titleLabel" destination="I6D-QY-o4D" id="Nob-mZ-NFF"/>
-                                            <outlet property="webView" destination="EjS-s7-pj8" id="5no-e6-TU5"/>
-                                        </connections>
-                                    </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCard" id="g2E-l0-sL9" customClass="ImageCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
                                         <rect key="frame" x="180" y="59" width="179" height="245"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="179" height="245"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="234"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SThomas.small.99.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hOb-g6-SBr" userLabel="ImagePreview">
@@ -138,6 +66,7 @@
                                             <constraint firstItem="hOb-g6-SBr" firstAttribute="centerX" secondItem="g2E-l0-sL9" secondAttribute="centerX" id="vug-rb-cNY"/>
                                             <constraint firstItem="VBJ-nE-fc1" firstAttribute="trailing" secondItem="g2E-l0-sL9" secondAttribute="trailingMargin" id="xhd-Y2-o0J"/>
                                         </constraints>
+                                        <size key="customSize" width="170" height="234"/>
                                         <variation key="default">
                                             <mask key="subviews">
                                                 <exclude reference="hOb-g6-SBr"/>
@@ -184,11 +113,85 @@
                                             <outlet property="titleLabel" destination="VBJ-nE-fc1" id="HE0-U2-dGV"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="articleCard" id="24o-dB-Pkd" userLabel="articleCard" customClass="ArticleCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="59" width="179" height="245"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="192" height="232"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6D-QY-o4D">
+                                                    <rect key="frame" x="8" y="8" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <size key="shadowOffset" width="0.0" height="1"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="8" width="183" height="21"/>
+                                                    </variation>
+                                                </label>
+                                                <webView userInteractionEnabled="NO" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EjS-s7-pj8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="199" height="232"/>
+                                                    </variation>
+                                                </webView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="EjS-s7-pj8" firstAttribute="height" secondItem="24o-dB-Pkd" secondAttribute="height" id="Iz5-8S-ldi"/>
+                                            <constraint firstItem="I6D-QY-o4D" firstAttribute="top" secondItem="24o-dB-Pkd" secondAttribute="topMargin" id="MoV-eN-Ml7"/>
+                                            <constraint firstItem="EjS-s7-pj8" firstAttribute="centerX" secondItem="24o-dB-Pkd" secondAttribute="centerX" id="ORF-G6-F5z"/>
+                                            <constraint firstItem="I6D-QY-o4D" firstAttribute="trailing" secondItem="24o-dB-Pkd" secondAttribute="trailingMargin" id="WTZ-7r-YPi"/>
+                                            <constraint firstItem="EjS-s7-pj8" firstAttribute="centerY" secondItem="24o-dB-Pkd" secondAttribute="centerY" id="bSZ-bL-FnP"/>
+                                            <constraint firstItem="I6D-QY-o4D" firstAttribute="leading" secondItem="24o-dB-Pkd" secondAttribute="leadingMargin" id="ksk-t2-1IC"/>
+                                            <constraint firstItem="EjS-s7-pj8" firstAttribute="width" secondItem="24o-dB-Pkd" secondAttribute="width" id="xEY-Tr-tKW"/>
+                                        </constraints>
+                                        <size key="customSize" width="192" height="232"/>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="I6D-QY-o4D"/>
+                                                <exclude reference="EjS-s7-pj8"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <exclude reference="MoV-eN-Ml7"/>
+                                                <exclude reference="WTZ-7r-YPi"/>
+                                                <exclude reference="ksk-t2-1IC"/>
+                                                <exclude reference="Iz5-8S-ldi"/>
+                                                <exclude reference="ORF-G6-F5z"/>
+                                                <exclude reference="bSZ-bL-FnP"/>
+                                                <exclude reference="xEY-Tr-tKW"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="subviews">
+                                                <include reference="I6D-QY-o4D"/>
+                                                <include reference="EjS-s7-pj8"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <include reference="MoV-eN-Ml7"/>
+                                                <include reference="WTZ-7r-YPi"/>
+                                                <include reference="ksk-t2-1IC"/>
+                                                <include reference="Iz5-8S-ldi"/>
+                                                <include reference="ORF-G6-F5z"/>
+                                                <include reference="bSZ-bL-FnP"/>
+                                                <include reference="xEY-Tr-tKW"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="I6D-QY-o4D" id="Nob-mZ-NFF"/>
+                                            <outlet property="webView" destination="EjS-s7-pj8" id="5no-e6-TU5"/>
+                                        </connections>
+                                    </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="textCard" id="AzH-L0-atr" customClass="TextCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
                                         <rect key="frame" x="360" y="59" width="179" height="245"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="179" height="245"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="203" height="268"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7FI-Ku-fQu">
@@ -217,6 +220,7 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="Xur-Bs-UPq" secondAttribute="trailing" id="d31-nq-vK9"/>
                                             <constraint firstItem="7FI-Ku-fQu" firstAttribute="leading" secondItem="AzH-L0-atr" secondAttribute="leadingMargin" id="tUo-8D-HZH"/>
                                         </constraints>
+                                        <size key="customSize" width="203" height="268"/>
                                         <variation key="default">
                                             <mask key="subviews">
                                                 <exclude reference="7FI-Ku-fQu"/>
@@ -320,7 +324,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1482" y="489"/>
+            <point key="canvasLocation" x="1482" y="488.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C5Z-8V-dhr">

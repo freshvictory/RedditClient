@@ -108,7 +108,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let post = postAtIndexPath(indexPath)
-        
+//        print("Creating cell for \(post.title)")
         // Self Post
         if post.isSelf {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(textReuseIdentifier, forIndexPath: indexPath) as? TextCardCollectionViewCell
@@ -158,18 +158,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
     }
     
     func shapeCell(cell: UICollectionViewCell) {
-        cell.contentView.layer.cornerRadius = 2.0
-        cell.contentView.layer.borderWidth = 1.0
-        cell.contentView.layer.borderColor = UIColor.clearColor().CGColor
-        cell.contentView.layer.masksToBounds = true
-        
-        cell.layer.shadowColor = UIColor.blackColor().CGColor
-        //        cell!.layer.backgroundColor = UIColor.clearColor().CGColor
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0)
-        cell.layer.shadowRadius = 2.0
-        cell.layer.shadowOpacity = 1.0
-        //        cell!.layer.masksToBounds = false
-        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).CGPath
+//        cell.contentView.layer.cornerRadius = 2.0
+//        cell.contentView.layer.borderWidth = 1.0
+//        cell.contentView.layer.borderColor = UIColor.clearColor().CGColor
+//        cell.contentView.layer.masksToBounds = true
+//        
+//        cell.layer.shadowColor = UIColor.blackColor().CGColor
+//        //        cell!.layer.backgroundColor = UIColor.clearColor().CGColor
+//        cell.layer.shadowOffset = CGSizeMake(0, 2.0)
+//        cell.layer.shadowRadius = 2.0
+//        cell.layer.shadowOpacity = 1.0
+//        //        cell!.layer.masksToBounds = false
+//        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).CGPath
     }
     
     override func viewDidLayoutSubviews() {
@@ -184,24 +184,24 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
-        
-        
-//        if indexPath == chosenPost {
-//            var size = view.bounds.size
-//            size.height -= topLayoutGuide.length
-//            size.height -= (sectionInsets.top + sectionInsets.right)
-//            size.width -= (sectionInsets.left + sectionInsets.right)
-//            return flickrPhoto.sizeToFillWidthOfSize(size)
-//        }
-        postCollectionView.collectionViewLayout.invalidateLayout()
-        return CGSize(width: defaultWidth, height: defaultHeight)
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        
+//        
+//        
+////        if indexPath == chosenPost {
+////            var size = view.bounds.size
+////            size.height -= topLayoutGuide.length
+////            size.height -= (sectionInsets.top + sectionInsets.right)
+////            size.width -= (sectionInsets.left + sectionInsets.right)
+////            return flickrPhoto.sizeToFillWidthOfSize(size)
+////        }
+//        postCollectionView.collectionViewLayout.invalidateLayout()
+//        return CGSize(width: defaultWidth, height: defaultHeight)
+//    }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return sectionInsets
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+//        return sectionInsets
+//    }
 }
 
 extension ViewController: UICollectionViewDelegate {
