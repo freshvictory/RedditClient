@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDataSource {
     
     @IBAction func login(sender: UIBarButtonItem) {
-        Reddit.sendAuthRequest()
+        Reddit.sendLoginRequest()
     }
     
     // The text field for entering a specific subreddit
@@ -25,7 +25,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
         self.automaticallyAdjustsScrollViewInsets = false
         
         postCollectionView.reloadData()
-        Reddit.refreshReddit()
+        //Reddit.refreshReddit()
+        Reddit.loadNewSubreddit(nil)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -37,7 +38,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
     // MARK: Search Field
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if let subreddit = textField.text {
-            Reddit.refreshReddit(Reddit.subredditURL(subreddit))
+            //Reddit.refreshReddit(Reddit.subredditURL(subreddit))
+            Reddit.loadNewSubreddit(subreddit)
         }
         textField.resignFirstResponder()
         

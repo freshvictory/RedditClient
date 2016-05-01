@@ -48,7 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tokenStart = rawFragment.substringFromIndex(rawFragment.startIndex.advancedBy(13))
         let token = tokenStart.substringToIndex(tokenStart.characters.indexOf("&")!)
         print("token: \(token)")
-        
+        Reddit.setUserToken(token)
+        //TODO refetch reddit data now
         
         return true
     }
