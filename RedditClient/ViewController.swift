@@ -44,20 +44,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
         textField.resignFirstResponder()
         
         // Scroll back to beginning
-//        postCollectionView.performBatchUpdates({
-            self.postCollectionView.reloadData()
-//            return
-//        }){
-//            completed in
-//            //4
-//            if self.chosenPost != nil {
-//                self.postCollectionView.scrollToItemAtIndexPath(
-//                    NSIndexPath(forItem: 0, inSection: 0),
-//                    atScrollPosition: .CenteredVertically,
-//                    animated: true)
-//            }
-//        }
-    
+        self.postCollectionView.reloadData()
+        postCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .Left, animated: true)
         return true
     }
 
@@ -76,32 +64,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
         }
     }
     let defaultWidth: CGFloat = 200
-    
-    var chosenPost: NSIndexPath? {
-        didSet {
-            var indexPaths = [NSIndexPath]()
-            if chosenPost != nil {
-                indexPaths.append(chosenPost!)
-            }
-            if oldValue != nil {
-                indexPaths.append(oldValue!)
-            }
-            
-            postCollectionView.performBatchUpdates({
-                self.postCollectionView.reloadItemsAtIndexPaths(indexPaths)
-                return
-            }){
-                completed in
-                //4
-                if self.chosenPost != nil {
-                    self.postCollectionView.scrollToItemAtIndexPath(
-                        self.chosenPost!,
-                        atScrollPosition: .CenteredVertically,
-                        animated: true)
-                }
-            }
-        }
-    }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -186,11 +148,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
     }
     
     func collectionView(collection: UICollectionView, selectedItemIndex: NSIndexPath) {
-        print("hello from should do something")
         self.performSegueWithIdentifier("showDetail", sender: self)
     }
-    
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
@@ -199,6 +158,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
             if let cell = sender as? UICollectionViewCell {
                 let index = self.postCollectionView.indexPathForCell(cell)!.row
                 destination.currentIndex = index
+                let popPC = destination.popoverPresentationController
+                popPC?.delegate = self
             }
         }
     }
@@ -221,6 +182,17 @@ extension ViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView,
                                  shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
+    }
+}
+
+extension ViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.FullScreen
+    }
+    
+    func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+        let navController = UINavigationController(rootViewController: controller.presentedViewController)
+        return navController
     }
 }
 
