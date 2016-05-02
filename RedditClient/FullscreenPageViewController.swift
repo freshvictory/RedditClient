@@ -38,7 +38,7 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
     @IBOutlet weak var previousButton: UIBarButtonItem!
     @IBAction func previousPost(sender: UIBarButtonItem) {
         if currentIndex != 0 {
-            currentIndex--
+            currentIndex -= 1
             navigationItem.title = Reddit.posts[currentIndex].title
             setViewControllers([fullscreenPostViewControllers[currentIndex]], direction: .Reverse, animated: true, completion: nil)
             previousButton.enabled = currentIndex != 0
@@ -49,7 +49,7 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
     @IBOutlet weak var nextButton: UIBarButtonItem!
     @IBAction func nextPost(sender: UIBarButtonItem) {
         if currentIndex != Reddit.posts.count - 1 {
-            currentIndex++
+            currentIndex += 1
             navigationItem.title = Reddit.posts[currentIndex].title
             setViewControllers([fullscreenPostViewControllers[currentIndex]], direction: .Forward, animated: true, completion: nil)
             nextButton.enabled = currentIndex != Reddit.posts.count - 1
