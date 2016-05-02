@@ -12,11 +12,54 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
     
     var fullscreenPostViewControllers: [UIViewController] = [UIViewController]()
     
+    @IBAction func doneButton(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     var currentIndex = 0
 
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBAction func savePost(sender: UIBarButtonItem) {
+        
+    }
+    
+    @IBOutlet weak var downvoteButton: UIBarButtonItem!
+    @IBAction func downvotePost(sender: UIBarButtonItem) {
+        
+    }
+    
+    @IBOutlet weak var upvoteButton: UIBarButtonItem!
+    @IBAction func upvotePost(sender: UIBarButtonItem) {
+        
+    }
+    
+    @IBOutlet weak var previousButton: UIBarButtonItem!
+    @IBAction func previousPost(sender: UIBarButtonItem) {
+        if currentIndex != 0 {
+            currentIndex--
+            navigationItem.title = Reddit.posts[currentIndex].title
+            setViewControllers([fullscreenPostViewControllers[currentIndex]], direction: .Reverse, animated: true, completion: nil)
+            previousButton.enabled = currentIndex != 0
+            nextButton.enabled = currentIndex != Reddit.posts.count - 1
+        }
+    }
+    
+    @IBOutlet weak var nextButton: UIBarButtonItem!
+    @IBAction func nextPost(sender: UIBarButtonItem) {
+        if currentIndex != Reddit.posts.count - 1 {
+            currentIndex++
+            navigationItem.title = Reddit.posts[currentIndex].title
+            setViewControllers([fullscreenPostViewControllers[currentIndex]], direction: .Forward, animated: true, completion: nil)
+            nextButton.enabled = currentIndex != Reddit.posts.count - 1
+            previousButton.enabled = currentIndex != 0
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.toolbarHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         createAllViewControllers()
         
         dataSource = self
@@ -41,7 +84,7 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
         guard let viewControllerIndex = fullscreenPostViewControllers.indexOf(viewController) else {
             return nil
         }
-        
+        currentIndex = viewControllerIndex
         let previousIndex = viewControllerIndex - 1
         
         guard previousIndex >= 0 else {
@@ -51,7 +94,10 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
         guard fullscreenPostViewControllers.count > previousIndex else {
             return nil
         }
-        navigationItem.title = Reddit.posts[previousIndex].title
+        
+        previousButton.enabled = currentIndex != 0
+        nextButton.enabled = currentIndex != Reddit.posts.count - 1
+        navigationItem.title = Reddit.posts[currentIndex].title
         return fullscreenPostViewControllers[previousIndex]
     }
     
@@ -61,6 +107,8 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
         guard let viewControllerIndex = fullscreenPostViewControllers.indexOf(viewController) else {
             return nil
         }
+        
+        currentIndex = viewControllerIndex
         
         let nextIndex = viewControllerIndex + 1
         let count = fullscreenPostViewControllers.count
@@ -72,7 +120,9 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
         guard count > nextIndex else {
             return nil
         }
-        navigationItem.title = Reddit.posts[nextIndex].title
+        nextButton.enabled = nextIndex != Reddit.posts.count - 1
+        previousButton.enabled = currentIndex != 0
+        navigationItem.title = Reddit.posts[currentIndex].title
         return fullscreenPostViewControllers[nextIndex]
     }
     

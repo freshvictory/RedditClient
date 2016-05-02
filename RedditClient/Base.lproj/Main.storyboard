@@ -98,7 +98,12 @@
                                         <connections>
                                             <outlet property="titleLabel" destination="I6D-QY-o4D" id="Nob-mZ-NFF"/>
                                             <outlet property="webView" destination="EjS-s7-pj8" id="5no-e6-TU5"/>
-                                            <segue destination="dI0-XX-svD" kind="push" id="OXT-zS-yZV"/>
+                                            <segue destination="dI0-XX-svD" kind="popoverPresentation" popoverAnchorView="8bC-Xf-vdC" id="OXT-zS-yZV">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                <popoverPassthroughViews>
+                                                    <view reference="8bC-Xf-vdC"/>
+                                                </popoverPassthroughViews>
+                                            </segue>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCard" id="g2E-l0-sL9" customClass="ImageCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
@@ -183,7 +188,12 @@
                                             <outlet property="imageView" destination="hOb-g6-SBr" id="q3M-Qa-bj0"/>
                                             <outlet property="textShadowView" destination="GxF-p2-UoT" id="0w8-yZ-rIO"/>
                                             <outlet property="titleLabel" destination="VBJ-nE-fc1" id="HE0-U2-dGV"/>
-                                            <segue destination="dI0-XX-svD" kind="push" id="a2C-oW-oUO"/>
+                                            <segue destination="dI0-XX-svD" kind="popoverPresentation" popoverAnchorView="8bC-Xf-vdC" id="a2C-oW-oUO">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                <popoverPassthroughViews>
+                                                    <view reference="8bC-Xf-vdC"/>
+                                                </popoverPassthroughViews>
+                                            </segue>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="textCard" id="AzH-L0-atr" customClass="TextCardCollectionViewCell" customModule="RedditClient" customModuleProvider="target">
@@ -252,7 +262,12 @@
                                         <connections>
                                             <outlet property="bodyLabel" destination="Xur-Bs-UPq" id="Kjr-97-BfD"/>
                                             <outlet property="titleLabel" destination="7FI-Ku-fQu" id="TCX-YP-DM5"/>
-                                            <segue destination="dI0-XX-svD" kind="show" id="6Ur-Uj-TdZ"/>
+                                            <segue destination="dI0-XX-svD" kind="popoverPresentation" popoverAnchorView="8bC-Xf-vdC" id="6Ur-Uj-TdZ">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                <popoverPassthroughViews>
+                                                    <view reference="8bC-Xf-vdC"/>
+                                                </popoverPassthroughViews>
+                                            </segue>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -380,19 +395,65 @@
             </objects>
             <point key="canvasLocation" x="1491" y="1228"/>
         </scene>
-        <!--Fullscreen Page View Controller-->
+        <!--FullscreenPage-->
         <scene sceneID="mGP-fC-nPo">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="dI0-XX-svD" customClass="FullscreenPageViewController" customModule="RedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="dI0-XX-svD" customClass="FullscreenPageViewController" customModule="RedditClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems>
-                        <barButtonItem title="previous" id="Vnf-bl-V9q"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="8h6-To-xah"/>
-                        <barButtonItem title="next" id="Ghn-IJ-ID0"/>
+                        <barButtonItem title="previous" id="Vnf-bl-V9q">
+                            <connections>
+                                <action selector="previousPost:" destination="dI0-XX-svD" id="EqS-oa-i8z"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="8nR-9Y-Irq"/>
+                        <barButtonItem title="save" id="M79-Qn-sth">
+                            <connections>
+                                <action selector="savePost:" destination="dI0-XX-svD" id="dAY-le-Guh"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="IDW-sY-eB7"/>
+                        <barButtonItem title="down" id="yWA-Zf-hz4">
+                            <connections>
+                                <action selector="downvotePost:" destination="dI0-XX-svD" id="Mck-DP-9tt"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="5fL-n8-aT2"/>
+                        <barButtonItem title="up" id="dnB-3f-cio">
+                            <connections>
+                                <action selector="upvotePost:" destination="dI0-XX-svD" id="bGO-Iy-rGl"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="7sB-hK-VLa"/>
+                        <barButtonItem title="next" id="Ghn-IJ-ID0">
+                            <connections>
+                                <action selector="nextPost:" destination="dI0-XX-svD" id="XDK-Qc-w5m"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="VF1-Gg-Kp0"/>
+                    <navigationItem key="navigationItem" title="FullscreenPage" id="Nyc-Va-Z7t">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="sfJ-rW-8WM">
+                            <connections>
+                                <action selector="doneButton:" destination="dI0-XX-svD" id="AgL-S1-hij"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="downvoteButton" destination="yWA-Zf-hz4" id="poQ-QB-7f7"/>
+                        <outlet property="nextButton" destination="Ghn-IJ-ID0" id="who-yg-vCb"/>
+                        <outlet property="previousButton" destination="Vnf-bl-V9q" id="NVg-Kn-Q9y"/>
+                        <outlet property="saveButton" destination="M79-Qn-sth" id="kPu-Vb-BwE"/>
+                        <outlet property="upvoteButton" destination="dnB-3f-cio" id="PaL-qN-vF6"/>
+                    </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tWF-QZ-vet" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="E8G-XC-dvg">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <items/>
+                </toolbar>
             </objects>
             <point key="canvasLocation" x="2299.5" y="493.5"/>
         </scene>
@@ -449,6 +510,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="webView" destination="c6H-1I-7r0" id="6Zk-xi-JtN"/>
                     </connections>
@@ -480,6 +542,6 @@
         <image name="SThomas.small.99.jpg" width="484" height="704"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a2C-oW-oUO"/>
+        <segue reference="OXT-zS-yZV"/>
     </inferredMetricsTieBreakers>
 </document>
