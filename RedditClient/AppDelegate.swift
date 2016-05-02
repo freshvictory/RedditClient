@@ -50,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("token: \(token)")
         Reddit.setUserToken(token)
         //TODO refetch reddit data now
+        NSNotificationCenter.defaultCenter().postNotificationName("userLoggedIn", object: nil)
+        
         
         return true
     }

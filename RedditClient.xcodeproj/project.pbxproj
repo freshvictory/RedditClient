@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0A68C5E1CD7F84A00508EB7 /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A68C5D1CD7F84A00508EB7 /* LoginPageViewController.swift */; };
+		B0A68C601CD7FF0500508EB7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A68C5F1CD7FF0500508EB7 /* User.swift */; };
 		D091A9F91CD55180001F684E /* FullscreenPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091A9F81CD55180001F684E /* FullscreenPageViewController.swift */; };
 		D091AA031CD5630A001F684E /* FullscreenPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091AA021CD5630A001F684E /* FullscreenPost.swift */; };
 		D09DE0FC1CB8B3E900736282 /* TextCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09DE0FB1CB8B3E900736282 /* TextCardCollectionViewCell.swift */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B0A68C5D1CD7F84A00508EB7 /* LoginPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
+		B0A68C5F1CD7FF0500508EB7 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D091A9F81CD55180001F684E /* FullscreenPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenPageViewController.swift; sourceTree = "<group>"; };
 		D091AA021CD5630A001F684E /* FullscreenPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenPost.swift; sourceTree = "<group>"; };
 		D09DE0FB1CB8B3E900736282 /* TextCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCardCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 				D0C8E5051CB43E5C00DC983C /* Info.plist */,
 				D0C8E50F1CB44AF000DC983C /* Reddit.swift */,
 				D0C8E5101CB44AF000DC983C /* Post.swift */,
+				B0A68C5D1CD7F84A00508EB7 /* LoginPageViewController.swift */,
+				B0A68C5F1CD7FF0500508EB7 /* User.swift */,
 			);
 			path = RedditClient;
 			sourceTree = "<group>";
@@ -163,12 +169,14 @@
 				D0C8E5111CB44AF000DC983C /* Reddit.swift in Sources */,
 				D0C8E4FC1CB43E5C00DC983C /* ViewController.swift in Sources */,
 				D09DE0FE1CB8C01900736282 /* ArticleCardCollectionViewCell.swift in Sources */,
+				B0A68C5E1CD7F84A00508EB7 /* LoginPageViewController.swift in Sources */,
 				D0C8E50E1CB44A8C00DC983C /* ImageCardCollectionViewCell.swift in Sources */,
 				D091A9F91CD55180001F684E /* FullscreenPageViewController.swift in Sources */,
 				D0C8E4FA1CB43E5C00DC983C /* AppDelegate.swift in Sources */,
 				D09DE0FC1CB8B3E900736282 /* TextCardCollectionViewCell.swift in Sources */,
 				D091AA031CD5630A001F684E /* FullscreenPost.swift in Sources */,
 				D0C8E5121CB44AF000DC983C /* Post.swift in Sources */,
+				B0A68C601CD7FF0500508EB7 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

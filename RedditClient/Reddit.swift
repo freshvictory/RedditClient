@@ -17,14 +17,19 @@ class Reddit {
     
     static var token: String?
     
-    static var userMode: Bool = false;
-    static var loggedIn: Bool = false;
+    static var userMode: Bool = false
+    static var loggedIn: Bool = false
+    
+    static var lastSubreddit: String?
+    
+    static var curUser: User?
     
     //Use this to load a new subreddit starting from the first page
     static func loadNewSubreddit(redditName: String?) {
         if(!loggedIn){
             logInNonUser()
         }
+        lastSubreddit = redditName
         
         posts = []
         var urlString = "https://oauth.reddit.com/"
@@ -61,43 +66,14 @@ class Reddit {
         }
         
     }
-
-    static func refreshReddit(reddit: String = "https://www.reddit.com/") -> Void {
-        posts = []
-        let url = NSURL(string: reddit + ".json")
-        let request = NSURLRequest(URL: url!)
-        let response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
-        do {
-          let data: NSData = try NSURLConnection.sendSynchronousRequest(request, returningResponse: response)
-          var json: Payload! = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? Payload
-          
-          guard let all = json["data"] as? Payload, let children = all["children"] as? [Payload]
-            else {
-              return
-          }
-          
-          for post in children {
-            guard let postdata = post["data"] as? Payload
-              else {
-                continue
-            }
-            if let nextPost = createPost(postdata) {
-              posts.append(nextPost)
-            }
-          }
-          
-        } catch {
-          print(error)
-        }
-    }
-
-    static func subredditURL(subreddit: String) -> String {
-        return "https://www.reddit.com/r/\(subreddit)"
+    
+    static func reloadCurrentSubreddit(){
+        loadNewSubreddit(lastSubreddit)
     }
 
     static func createPost(postdata: Payload) -> Post? {
 
-        guard let title = postdata["title"] as? String, let op = postdata["author"] as? String, let votes = postdata["score"] as? Int, let comments = postdata["num_comments"] as? Int, var url = NSURL(string: (postdata["url"] as? String)!), let subreddit = postdata["subreddit"] as? String, let domain = postdata["domain"] as? String, let isSelf = postdata["is_self"] as? Bool, let selfText = postdata["selftext"] as? String
+        guard let title = postdata["title"] as? String, let op = postdata["author"] as? String, let votes = postdata["score"] as? Int, let comments = postdata["num_comments"] as? Int, let url = NSURL(string: (postdata["url"] as? String)!), let subreddit = postdata["subreddit"] as? String, let domain = postdata["domain"] as? String, let isSelf = postdata["is_self"] as? Bool, let selfText = postdata["selftext"] as? String
           else {
             return nil
         }
@@ -124,10 +100,9 @@ class Reddit {
 
         return post
     }
-
     
-    static func sendLoginRequest(){
-        UIApplication.sharedApplication().openURL(NSURL(string: "https://www.reddit.com/api/v1/authorize?client_id=OI7wplUN-g7pGA&response_type=token&state=RANDOM_STRING&redirect_uri=readitClient://oauth&scope=identity,flair,history,mysubreddits,read,report,save,subscribe,vote")!)
+    static func getLoginURL() -> NSURL {
+        return NSURL(string: "https://www.reddit.com/api/v1/authorize?client_id=OI7wplUN-g7pGA&response_type=token&state=RANDOM_STRING&redirect_uri=readitClient://oauth&scope=identity,flair,history,mysubreddits,read,report,save,subscribe,vote")!
     }
     
     static func logInNonUser(){
@@ -150,9 +125,7 @@ class Reddit {
             var json: Payload! = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? Payload
             print(json)
             
-            token = json["access_token"] as? String
-            loggedIn = true;
-            userMode = false;
+            setNonUserToken(json["access_token"] as! String)
         } catch {
             print(error)
         }
@@ -163,11 +136,32 @@ class Reddit {
         loggedIn = true
         userMode = true
         token = newToken
+        loadUserData()
+    }
+    
+    static func loadUserData(){
+        if !userMode {
+            return
+        }
+        print("loading user data")
+        let url = NSURL(string: "https://oauth.reddit.com/api/v1/me")
+        let request = NSMutableURLRequest(URL: url!)
+        let response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
+        request.addValue("bearer \(token!)", forHTTPHeaderField: "Authorization")
+        do {
+            let data: NSData = try NSURLConnection.sendSynchronousRequest(request, returningResponse: response)
+            let json: Payload! = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? Payload
+            curUser = User(username: json["name"] as! String, linkKarma: json["link_karma"] as! Int, commentKarma: json["comment_karma"] as! Int)
+            print(json)
+        } catch {
+            print(error)
+        }
     }
     
     static func setNonUserToken(newToken: String){
         loggedIn = true
         userMode = false
         token = newToken
+        curUser = nil
     }
 }

@@ -10,8 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDataSource {
     
+    @IBOutlet weak var loginButton: UIBarButtonItem!
+    
     @IBAction func login(sender: UIBarButtonItem) {
-        Reddit.sendLoginRequest()
+        performSegueWithIdentifier("loginPageSegue", sender: self)
     }
     
     // The text field for entering a specific subreddit
@@ -24,10 +26,30 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.userLoggedInCallback), name: "userLoggedIn", object: nil)
+        
         postCollectionView.reloadData()
         //Reddit.refreshReddit()
         Reddit.loadNewSubreddit(nil)
         // Do any additional setup after loading the view, typically from a nib.
+        setupLoginButton()
+    }
+    
+    func userLoggedInCallback(){
+        print("reloading current subreddit due to message")
+        Reddit.reloadCurrentSubreddit()
+        postCollectionView.reloadData()
+        setupLoginButton()
+    }
+    
+    func setupLoginButton(){
+        if Reddit.userMode {
+            loginButton.enabled = false;
+            loginButton.title = Reddit.curUser?.username
+        } else {
+            loginButton.enabled = true;
+            loginButton.title = "log in"
+        }
     }
 
     override func didReceiveMemoryWarning() {
