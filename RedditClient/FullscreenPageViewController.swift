@@ -10,9 +10,12 @@ import UIKit
 
 class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDataSource {
     
+    var postCollectionView: UICollectionView?
+    
     var fullscreenPostViewControllers: [UIViewController] = [UIViewController]()
     
     @IBAction func doneButton(sender: UIBarButtonItem) {
+        postCollectionView?.scrollToItemAtIndexPath(NSIndexPath(forItem: currentIndex, inSection: 0), atScrollPosition: .Left, animated: false)
         dismissViewControllerAnimated(true, completion: nil)
     }
     var currentIndex = 0
@@ -63,7 +66,7 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
         createAllViewControllers()
         
         dataSource = self
-        
+        previousButton.enabled = currentIndex != 0
         let firstViewController = fullscreenPostViewControllers[currentIndex]
         navigationItem.title = Reddit.posts[currentIndex].title
         setViewControllers([firstViewController],

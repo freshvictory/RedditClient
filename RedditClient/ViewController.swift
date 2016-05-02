@@ -39,6 +39,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
         print("reloading current subreddit due to message")
         Reddit.reloadCurrentSubreddit()
         postCollectionView.reloadData()
+        postCollectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: .Left, animated: true)
         setupLoginButton()
     }
     
@@ -180,6 +181,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
             if let cell = sender as? UICollectionViewCell {
                 let index = self.postCollectionView.indexPathForCell(cell)!.row
                 destination.currentIndex = index
+                destination.postCollectionView = self.postCollectionView
                 let popPC = destination.popoverPresentationController
                 popPC?.delegate = self
             }
