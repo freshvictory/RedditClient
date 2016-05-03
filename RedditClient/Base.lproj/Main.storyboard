@@ -286,6 +286,12 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="PPk-WK-z5r"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBa-an-dfc">
+                                <rect key="frame" x="20" y="72" width="560" height="220"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -293,14 +299,18 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstAttribute="trailing" secondItem="xg4-3K-Mn6" secondAttribute="trailing" id="A8K-wb-wzW"/>
+                            <constraint firstItem="nBa-an-dfc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Cok-bK-uV9"/>
+                            <constraint firstItem="xg4-3K-Mn6" firstAttribute="top" secondItem="nBa-an-dfc" secondAttribute="bottom" constant="8" symbolic="YES" id="DyK-wF-gTW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xg4-3K-Mn6" secondAttribute="trailing" id="Usx-A8-pZS">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
                             </constraint>
+                            <constraint firstItem="nBa-an-dfc" firstAttribute="centerX" secondItem="xg4-3K-Mn6" secondAttribute="centerX" id="Y4j-p7-qNp"/>
                             <constraint firstItem="xg4-3K-Mn6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="236" id="YBo-02-viO"/>
                             <constraint firstItem="xg4-3K-Mn6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZAZ-kd-OcI"/>
                             <constraint firstItem="xg4-3K-Mn6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ZTL-jN-CFn">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
                             </constraint>
+                            <constraint firstItem="nBa-an-dfc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ngb-r3-DNR"/>
                             <constraint firstItem="xg4-3K-Mn6" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="rRF-eL-0NE"/>
                         </constraints>
                         <variation key="default">
@@ -337,6 +347,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="infoLabel" destination="nBa-an-dfc" id="wag-E2-ZaI"/>
                         <outlet property="loginButton" destination="UdO-Kl-aWY" id="rwr-1P-P2f"/>
                         <outlet property="postCollectionView" destination="xg4-3K-Mn6" id="2oT-s2-60B"/>
                         <outlet property="subredditTextField" destination="bsc-cP-1Z4" id="sFr-OZ-5UQ"/>
@@ -345,7 +356,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1491" y="493.5"/>
+            <point key="canvasLocation" x="1491" y="493"/>
         </scene>
         <!--Login Page View Controller-->
         <scene sceneID="7bf-PF-fC4">

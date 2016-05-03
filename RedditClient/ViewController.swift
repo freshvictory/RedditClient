@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var loginButton: UIBarButtonItem!
+    @IBOutlet weak var infoLabel: UILabel!
     
     @IBAction func login(sender: UIBarButtonItem) {
         performSegueWithIdentifier("loginPageSegue", sender: self)
@@ -33,6 +34,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
         Reddit.loadNewSubreddit(nil)
         // Do any additional setup after loading the view, typically from a nib.
         setupLoginButton()
+        setupInfoLabel()
+    }
+    
+    func setupInfoLabel(){
+        if(Reddit.lastSubreddit == nil){
+            infoLabel.text = "Homepage"
+        } else if(Reddit.lastSubreddit == ""){
+            infoLabel.text = "Homepage"
+        } else {
+            infoLabel.text = "/r/\(Reddit.lastSubreddit!)"
+        }
     }
     
     func userLoggedInCallback(){
@@ -63,6 +75,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UICollectionViewDat
         if let subreddit = textField.text {
             //Reddit.refreshReddit(Reddit.subredditURL(subreddit))
             Reddit.loadNewSubreddit(subreddit)
+            setupInfoLabel()
         }
         textField.resignFirstResponder()
         
