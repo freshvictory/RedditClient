@@ -42,12 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        print("deep link recieved from \(sourceApplication): \(url)")
+        //print("deep link recieved from \(sourceApplication): \(url)")
         let rawFragment = url.fragment!
-        print("raw fragment: \(rawFragment)")
+        //print("raw fragment: \(rawFragment)")
         let tokenStart = rawFragment.substringFromIndex(rawFragment.startIndex.advancedBy(13))
         let token = tokenStart.substringToIndex(tokenStart.characters.indexOf("&")!)
-        print("token: \(token)")
+        //print("token: \(token)")
         Reddit.setUserToken(token)
         //TODO refetch reddit data now
         NSNotificationCenter.defaultCenter().postNotificationName("userLoggedIn", object: nil)

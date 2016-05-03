@@ -22,9 +22,13 @@ class Post {
     var selftext: String?
     var mediaEmbed: String?
     var previewURL: NSURL?
+    var name: String?
+    var userVote: Int?
+    var saved: Bool?
     //var commentLink: NSURL
 
-    init(title: String, op: String, subreddit: String, url: NSURL, votes: Int, comments: Int, domain: String, isSelf: Bool, selftext: String, previewURL: NSURL /*, commentLink: NSURL*/) {
+    init(name: String, title: String, op: String, subreddit: String, url: NSURL, votes: Int, comments: Int, domain: String, isSelf: Bool, selftext: String, previewURL: NSURL, userVote: Int, saved: Bool /*, commentLink: NSURL*/) {
+        self.name = name
         self.title = title
         self.op = op
         self.subreddit = subreddit
@@ -35,6 +39,8 @@ class Post {
         self.isSelf = isSelf
         self.selftext = selftext
         self.previewURL = previewURL
+        self.userVote = userVote
+        self.saved = saved
         loadImage { (post, error) in
             //add something later
         }

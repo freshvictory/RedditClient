@@ -14,6 +14,9 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
     
     var fullscreenPostViewControllers: [UIViewController] = [UIViewController]()
     
+    let upvoteColor = UIColor(red: CGFloat(0xFF)/CGFloat(255), green: CGFloat(0x8B)/CGFloat(255), blue: CGFloat(0x60)/CGFloat(255), alpha: 1)
+    let downvoteColor = UIColor(red: CGFloat(0x94)/CGFloat(255), green: CGFloat(0x94)/CGFloat(255), blue: CGFloat(0xFF)/CGFloat(255), alpha: 1)
+    
     @IBAction func doneButton(sender: UIBarButtonItem) {
         postCollectionView?.scrollToItemAtIndexPath(NSIndexPath(forItem: currentIndex, inSection: 0), atScrollPosition: .Left, animated: false)
         dismissViewControllerAnimated(true, completion: nil)
@@ -22,17 +25,20 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBAction func savePost(sender: UIBarButtonItem) {
-        
+        Reddit.toggleSave(Reddit.posts[currentIndex])
+        setupButtons()
     }
     
     @IBOutlet weak var downvoteButton: UIBarButtonItem!
     @IBAction func downvotePost(sender: UIBarButtonItem) {
-        
+        Reddit.downvote(Reddit.posts[currentIndex])
+        setupButtons()
     }
     
     @IBOutlet weak var upvoteButton: UIBarButtonItem!
     @IBAction func upvotePost(sender: UIBarButtonItem) {
-        
+        Reddit.upvote(Reddit.posts[currentIndex])
+        setupButtons()
     }
     
     @IBOutlet weak var previousButton: UIBarButtonItem!
@@ -43,6 +49,7 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
             setViewControllers([fullscreenPostViewControllers[currentIndex]], direction: .Reverse, animated: true, completion: nil)
             previousButton.enabled = currentIndex != 0
             nextButton.enabled = currentIndex != Reddit.posts.count - 1
+            setupButtons()
         }
     }
     
@@ -54,11 +61,45 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
             setViewControllers([fullscreenPostViewControllers[currentIndex]], direction: .Forward, animated: true, completion: nil)
             nextButton.enabled = currentIndex != Reddit.posts.count - 1
             previousButton.enabled = currentIndex != 0
+            setupButtons()
+        }
+    }
+    
+    func setupButtons(){
+        if Reddit.userMode {
+            upvoteButton.enabled = true
+            downvoteButton.enabled = true
+            saveButton.enabled = true
+            let post = Reddit.posts[currentIndex]
+            if(post.userVote == 1){
+                upvoteButton.tintColor = upvoteColor
+                downvoteButton.tintColor = nil
+            } else if(post.userVote == -1){
+                downvoteButton.tintColor = downvoteColor
+                upvoteButton.tintColor = nil
+            } else {
+                upvoteButton.tintColor = nil
+                downvoteButton.tintColor = nil
+            }
+            if post.saved! {
+                saveButton.title = "unsave"
+            } else {
+                saveButton.title = "save"
+            }
+        } else {
+            upvoteButton.tintColor = nil
+            downvoteButton.tintColor = nil
+            saveButton.title = "save"
+            upvoteButton.enabled = false
+            downvoteButton.enabled = false
+            saveButton.enabled = false
         }
     }
     
     override func viewWillAppear(animated: Bool) {
         navigationController?.toolbarHidden = false
+        
+        setupButtons()
     }
     
     override func viewDidLoad() {
@@ -101,6 +142,7 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
         previousButton.enabled = currentIndex != 0
         nextButton.enabled = currentIndex != Reddit.posts.count - 1
         navigationItem.title = Reddit.posts[currentIndex].title
+        setupButtons()
         return fullscreenPostViewControllers[previousIndex]
     }
     
@@ -126,6 +168,7 @@ class FullscreenPageViewController: UIPageViewController, UIPageViewControllerDa
         nextButton.enabled = nextIndex != Reddit.posts.count - 1
         previousButton.enabled = currentIndex != 0
         navigationItem.title = Reddit.posts[currentIndex].title
+        setupButtons()
         return fullscreenPostViewControllers[nextIndex]
     }
     

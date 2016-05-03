@@ -72,11 +72,28 @@ class Reddit {
     }
 
     static func createPost(postdata: Payload) -> Post? {
+        
+        print("\n\n****POST****\n\n\(postdata)")
 
-        guard let title = postdata["title"] as? String, let op = postdata["author"] as? String, let votes = postdata["score"] as? Int, let comments = postdata["num_comments"] as? Int, let url = NSURL(string: (postdata["url"] as? String)!), let subreddit = postdata["subreddit"] as? String, let domain = postdata["domain"] as? String, let isSelf = postdata["is_self"] as? Bool, let selfText = postdata["selftext"] as? String
+        guard let title = postdata["title"] as? String, let op = postdata["author"] as? String, let votes = postdata["score"] as? Int, let comments = postdata["num_comments"] as? Int, let url = NSURL(string: (postdata["url"] as? String)!), let subreddit = postdata["subreddit"] as? String, let domain = postdata["domain"] as? String, let isSelf = postdata["is_self"] as? Bool, let selfText = postdata["selftext"] as? String, let name = postdata["name"] as? String, let saved = postdata["saved"] as? Int
           else {
             return nil
         }
+        
+        let likes = postdata["likes"] as? Int
+        var vote: Int
+        if likes == nil {
+            vote = 0
+        } else if likes == 1 {
+            vote = 1
+        } else if likes == 0 {
+            vote = -1
+        } else {
+            vote = 0
+            print("error reading likes field: \(likes)")
+        }
+        
+        print("likes \(likes) -> vote \(vote)")
         var previewURL: NSURL = NSURL()
         // Let's see if there's an image for this
         if let imagePreview = postdata["preview"] as? Payload {
@@ -89,7 +106,7 @@ class Reddit {
             }
         }
         
-        let post = Post(title: title, op: op, subreddit: subreddit, url: url, votes: votes, comments: comments, domain: domain, isSelf: isSelf, selftext: selfText, previewURL: previewURL)
+        let post = Post(name: name, title: title, op: op, subreddit: subreddit, url: url, votes: votes, comments: comments, domain: domain, isSelf: isSelf, selftext: selfText, previewURL: previewURL, userVote: vote, saved: saved != 0)
         
         // Let's see if there's embeddable media
         if let embed = postdata["media_embed"] as? Payload {
@@ -102,7 +119,7 @@ class Reddit {
     }
     
     static func getLoginURL() -> NSURL {
-        return NSURL(string: "https://www.reddit.com/api/v1/authorize?client_id=OI7wplUN-g7pGA&response_type=token&state=RANDOM_STRING&redirect_uri=readitClient://oauth&scope=identity,flair,history,mysubreddits,read,report,save,subscribe,vote")!
+        return NSURL(string: "https://www.reddit.com/api/v1/authorize?client_id=OI7wplUN-g7pGA&response_type=token&state=RANDOM_STRING&redirect_uri=readitClient://oauth&scope=identity,mysubreddits,read,save,vote")!
     }
     
     static func logInNonUser(){
@@ -123,7 +140,6 @@ class Reddit {
             let response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
             let data: NSData = try NSURLConnection.sendSynchronousRequest(request, returningResponse: response)
             var json: Payload! = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? Payload
-            print(json)
             
             setNonUserToken(json["access_token"] as! String)
         } catch {
@@ -152,7 +168,6 @@ class Reddit {
             let data: NSData = try NSURLConnection.sendSynchronousRequest(request, returningResponse: response)
             let json: Payload! = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? Payload
             curUser = User(username: json["name"] as! String, linkKarma: json["link_karma"] as! Int, commentKarma: json["comment_karma"] as! Int)
-            print(json)
         } catch {
             print(error)
         }
@@ -163,5 +178,74 @@ class Reddit {
         userMode = false
         token = newToken
         curUser = nil
+    }
+    
+    static func voteOnPost(post: Post, direction: Int){
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://oauth.reddit.com/api/vote?dir=\(direction)&id=\(post.name!)")!)
+        request.HTTPMethod = "POST"
+        request.addValue("bearer \(token!)", forHTTPHeaderField: "Authorization")
+        do {
+            let response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
+            let data: NSData = try NSURLConnection.sendSynchronousRequest(request, returningResponse: response)
+            let json: Payload! = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? Payload
+            post.userVote = direction
+            print(json)
+        } catch {
+            print(error)
+        }
+    }
+    
+    static func upvote(post: Post){
+        if post.userVote == 1 {
+            voteOnPost(post, direction: 0)
+        } else {
+            voteOnPost(post, direction: 1)
+        }
+    }
+    
+    static func downvote(post: Post){
+        if(post.userVote == -1){
+            voteOnPost(post, direction: 0)
+        } else {
+            voteOnPost(post, direction: -1)
+        }
+    }
+    
+    static func toggleSave(post: Post){
+        if post.saved! {
+            unsavePost(post)
+        } else {
+            savePost(post)
+        }
+    }
+    
+    static func savePost(post: Post){
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://oauth.reddit.com/api/save?id=\(post.name!)")!)
+        request.HTTPMethod = "POST"
+        request.addValue("bearer \(token!)", forHTTPHeaderField: "Authorization")
+        do {
+            let response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
+            let data: NSData = try NSURLConnection.sendSynchronousRequest(request, returningResponse: response)
+            let json: Payload! = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? Payload
+            print(json)
+            post.saved = true
+        } catch {
+            print(error)
+        }
+    }
+    
+    static func unsavePost(post: Post){
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://oauth.reddit.com/api/unsave?id=\(post.name!)")!)
+        request.HTTPMethod = "POST"
+        request.addValue("bearer \(token!)", forHTTPHeaderField: "Authorization")
+        do {
+            let response: AutoreleasingUnsafeMutablePointer<NSURLResponse?> = nil
+            let data: NSData = try NSURLConnection.sendSynchronousRequest(request, returningResponse: response)
+            let json: Payload! = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? Payload
+            print(json)
+            post.saved = false
+        } catch {
+            print(error)
+        }
     }
 }
